@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Douceur Sucrée - Pâtisserie Artisanale</title>
+
+    <!-- Applique le thème sauvegardé AVANT l'affichage pour éviter un flash de mauvaise couleur -->
+    <script>
+        (function() {
+            var themeSauvegarde = localStorage.getItem('theme-douceur-sucree');
+            if (themeSauvegarde === 'sombre') {
+                document.documentElement.setAttribute('data-theme', 'sombre');
+            }
+        })();
+    </script>
+    
+    <!-- Polices Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Feuille de style externe -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo">Douceur Sucrée</div>
+        <nav>
+            <a href="#accueil">Accueil</a>
+            <a href="#menu">Notre Menu</a>
+            <a href="#avis">Avis</a>
+            <a href="#reservation">Réservation</a>
+            <a href="#apropos">À propos</a>
+            <a href="#contact">Contact</a>
+        </nav>
+        <div class="header-actions">
+            <button class="btn-theme" id="bouton-theme" onclick="basculerTheme()" aria-label="Basculer entre mode clair et mode sombre" title="Mode sombre / clair">🌙</button>
+            <a href="#panier-ancre" class="btn btn-panier-nav">
+                🛒 Panier (<span id="compteur-panier">0</span>)
+            </a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="accueil">
+        <div class="hero-content">
+            <h1>Chaque Douceur Raconte une Histoire</h1>
+            <p>À Badalabougou, nos pâtissiers pétrissent, garnissent et dorent chaque création dès l'aube pour vous offrir la fraîcheur d'un vrai fait-maison, à déguster sur place ou à emporter.</p>
+            <div class="hero-buttons">
+                <a href="#menu" class="btn">Explorer le menu</a>
+                <a href="#reservation" class="btn btn-secondaire">Réserver une table</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- MENU -->
+    <section id="menu">
+        <h2>Notre Menu</h2>
+
+        <!-- CATÉGORIE 1: VIENNOISERIES -->
+        <h3 class="categorie-titre">🥐 Viennoiseries & Petit-Déjeuner</h3>
+        <div class="grille">
+            <div class="carte">
+                <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=1000" alt="Viennoiseries">
+                <div class="carte-contenu">
+                    <h3>Viennoiseries Artisanales</h3>
+                    <p>Croissants, pains au chocolat et brioches pur beurre croustillants.</p>
+                    <div class="carte-bas">
+                        <p class="prix">600 F</p>
+                        <button class="btn-ajouter" onclick="ajouterAuPanier('Viennoiseries Artisanales', 600)">+ Ajouter</button>
+                    </div>
+                </div>
+            </div>
+            <div class="carte">
+                <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=1000" alt="Chausson aux pommes">
+                <div class="carte-contenu">
+                    <h3>Chausson aux Pommes</h3>
+                    <p>Feuilletage doré garni d'une compote de pommes maison doucement parfumée.</p>
+                    <div class="carte-bas">
+                        <p class="prix">800 F</p>
+                        <button class="btn-ajouter" onclick="ajouterAuPanier('Chausson aux Pommes', 800)">+ Ajouter</button>
+                    </div>
+                </div>
+            </div>
+            <div class="carte">
+                <img src="https://images.unsplash.com/photo-1550005399-c95f859c0fc7?q=80&w=1000" alt="Croissants au beurre">
+                <div class="carte-contenu">
+                    <h3>Croissants au Beurre</h3>
+                    <p>Le classique : pur beurre AOP, 27 tours de feuilletage, doré et craquant.</p>
+                    <div class="carte-bas">
+                        <p class="prix">500 F</p>
+                        <button class="btn-ajouter" onclick="ajouterAuPanier('Croissants au Beurre', 500)">+ Ajouter</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CATÉGORIE 2: PÂTISSERIES -->
+        <h3 class="categorie-titre">🍰 Pâtisseries & Desserts</h3>
+        <div class="grille">
+            <div class="carte">
+                <img src="https://images.unsplash.com/photo-1569864358642-9d1684040f43?q=80&w=1000" alt="Macarons">
+                <div class="carte-contenu">
+                    <h3>Macarons Assortis</h3>
+                    <p>Boîte de 12 macarons aux saveurs de framboise, pistache, vanille et chocolat.</p>
+                    <div class="carte-bas">
+                        <p class="prix">7 000 F</p>
+                        <button class="btn-ajouter" onclick="ajouterAuPanier('Boîte de Macarons Assortis', 7000)">+ Ajouter</button>
+                    </div>
+                </div>
+            </div>
+            <div class="carte">
+                <img src="https://images.unsplash.com/photo-1606313564200-e75d5e30476c?q=80&w=1000" alt="Forêt Noire">
+                <div class="carte-contenu">
+                    <h3>Forêt Noire</h3>
+                    <p>Gâteau moelleux au chocolat, cerises griottes et crème chantilly génoise.</p>
+                    <div class="carte-bas">
+                        <p class="prix">14 000 F</p>
+                        <button class="btn-ajouter" onclick="ajouterAuPanier('Forêt Noire', 14000)">+ Ajouter</button>
+                    </div>
+                </div>
+            </div>
+            <div class="carte">
+                <img src="https://images.unsplash.com/photo-1519869325930-281384150729?q=80&w=1000" alt="Tartelette Citron">
+                <div class="carte-contenu">
+                    <h3>Tartelette Citron Meringuée</h3>
+                    <p>Pâte sablée, crème citron acidulée et meringue italienne dorée.</p>
+                    <div class="carte-bas">
+                        <p class="prix">2 500 F</p>
+                        <button class="btn-ajouter" onclick="ajouterAuPanier('Tartelette Citron Meringuée', 2500)">+ Ajouter</button>
+                    </div>
+                </div>
+            </div>
+            <div class="carte">
+                <img src="https://images.unsplash.com/photo-1621236378699-8597faf6a176?q=80&w=1000" alt="Éclair au chocolat">
+                <div class="carte-contenu">
+                    <h3>Éclair au Chocolat</h3>
+                    <p>Pâte à choux garnie d'une crème pâtissière intense au chocolat noir.</p>
+                    <div class="carte-bas">
+                        <p class="prix">1 500 F</p>
+                        <button class="btn-ajouter" onclick="ajouterAuPanier('Éclair au Chocolat', 1500)">+ Ajouter</button>
+                    </div>
+                </div>
+            </div>
+            <!-- NOUVEAU PRODUIT 1 -->
+            <div class="carte">
+                <img src="https://images.unsplash.com/photo-1568571780765-9276ac8b75a2?q=80&w=1000" alt="Tarte Tatin">
+                <div class="carte-contenu">
+                    <h3>Tarte Tatin Caramélisée</h3>
+                    <p>Pommes fondantes caramélisées au beurre doux sur une pâte feuilletée croustillante.</p>
+                    <div class="carte-bas">
+                        <p class="prix">3 000 F</p>
+                        <button class="btn-ajouter" onclick="ajouterAuPanier('Tarte Tatin Caramélisée', 3000)">+ Ajouter</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CATÉGORIE 3: GÂTEAUX SUR COMMANDE (NOUVEAU) -->
+        <h3 class="categorie-titre">🎂 Gâteaux sur Commande</h3>
+        <div class="grille">
+            <div class="carte">
+                <img src="https://images.unsplash.com/photo-1555689501-ca921e629309?q=80&w=1000" alt="Gâteau d'anniversaire personnalisé">
+                <div class="carte-contenu">
+                    <h3>Gâteau d'Anniversaire Personnalisé</h3>
+                    <p>Génoise vanille ou chocolat, glaçage sur mesure et message au choix. Commande 48h à l'avance.</p>
+                    <div class="carte-bas">
+                        <p class="prix">18 000 F</p>
+                        <button class="btn-ajouter" onclick="ajouterAuPanier('Gâteau d\'Anniversaire Personnalisé', 18000)">+ Ajouter</button>
+                    </div>
+                </div>
+            </div>
+            <div class="carte">
+                <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?q=80&w=1000" alt="Cookie géant pépites de chocolat">
+                <div class="carte-contenu">
+                    <h3>Cookie Géant Pépites de Chocolat</h3>
+                    <p>Cœur fondant, bords croustillants et un maximum de pépites de chocolat noir.</p>
+                    <div class="carte-bas">
+                        <p class="prix">1 200 F</p>
+                        <button class="btn-ajouter" onclick="ajouterAuPanier('Cookie Géant Pépites de Chocolat', 1200)">+ Ajouter</button>
+                    </div>
+                </div>
+            </div>
+            <div class="carte">
+                <img src="https://images.unsplash.com/photo-1579761314336-f27ea6297ae1?q=80&w=1000" alt="Donut glaçage chocolat">
+                <div class="carte-contenu">
+                    <h3>Donut Glaçage Chocolat</h3>
+                    <p>Pâte moelleuse, glaçage chocolat noir brillant et éclats de sucre.</p>
+                    <div class="carte-bas">
+                        <p class="prix">900 F</p>
+                        <button class="btn-ajouter" onclick="ajouterAuPanier('Donut Glaçage Chocolat', 900)">+ Ajouter</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CATÉGORIE 4: BOISSONS -->
+        <h3 class="categorie-titre">☕ Boissons & Rafraîchissements</h3>
+        <div class="grille">
+            <div class="carte">
+                <img src="https://images.unsplash.com/photo-1534778101976-62847782c213?q=80&w=1000" alt="Café Cappuccino">
+                <div class="carte-contenu">
+                    <h3>Café Cappuccino</h3>
+                    <p>Espresso riche recouvert d'une mousse de lait moussée à la perfection.</p>
+                    <div class="carte-bas">
+                        <p class="prix">1 500 F</p>
+                        <button class="btn-ajouter" onclick="ajouterAuPanier('Café Cappuccino', 1500)">+ Ajouter</button>
+                    </div>
+                </div>
+            </div>
+            <div class="carte">
+                <img src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?q=80&w=1000" alt="Thé Glacé Maison">
+                <div class="carte-contenu">
+                    <h3>Thé Glacé Maison</h3>
+                    <p>Infusion glacée à la pêche et menthe fraîche, peu sucrée.</p>
+                    <div class="carte-bas">
+                        <p class="prix">1 200 F</p>
+                        <button class="btn-ajouter" onclick="ajouterAuPanier('Thé Glacé Maison', 1200)">+ Ajouter</button>
+                    </div>
+                </div>
+            </div>
+            <!-- NOUVEAU PRODUIT 2 -->
+            <div class="carte">
+                <img src="https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?q=80&w=1000" alt="Chocolat Chaud">
+                <div class="carte-contenu">
+                    <h3>Chocolat Chaud Viennois</h3>
+                    <p>Chocolat noir fondu onctueux, surmonté d'une généreuse crème chantilly maison.</p>
+                    <div class="carte-bas">
+                        <p class="prix">2 000 F</p>
+                        <button class="btn-ajouter" onclick="ajouterAuPanier('Chocolat Chaud Viennois', 2000)">+ Ajouter</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION PANIER INTERACTIF -->
+    <section id="panier-ancre" class="section-panier">
+        <h2>Votre Panier</h2>
+        <div class="conteneur-panier">
+            <div id="liste-panier">
+                <p class="panier-vide">Votre panier est actuellement vide. Choisissez vos gourmandises ci-dessus !</p>
+            </div>
+            <div class="panier-recap">
+                <h3>Total : <span id="total-panier">0</span> F CFA</h3>
+                <button class="btn" onclick="transfererVersReservation()">Valider et insérer dans la réservation ➔</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION AVIS CLIENTS -->
+    <section id="avis" class="section-avis">
+        <h2>Ce que disent nos clients</h2>
+        <div class="grille-avis">
+            <div class="carte-avis">
+                <p class="etoiles">⭐⭐⭐⭐⭐</p>
+                <p class="texte-avis">« Les macarons sont tout simplement divins ! Croustillants à l'extérieur et tellement fondants. Le service sur place est impeccable. »</p>
+                <h4>— Aminata D.</h4>
+            </div>
+            <div class="carte-avis">
+                <p class="etoiles">⭐⭐⭐⭐⭐</p>
+                <p class="texte-avis">« J'ai commandé une Forêt Noire pour un anniversaire, tout le monde s'est régalé ! Cadre très chaleureux à Badalabougou. »</p>
+                <h4>— Samba K.</h4>
+            </div>
+            <div class="carte-avis">
+                <p class="etoiles">⭐⭐⭐⭐⭐</p>
+                <p class="texte-avis">« Les viennoiseries du matin avec un petit cappuccino... Un vrai bonheur pour démarrer la journée. Je recommande vivement ! »</p>
+                <h4>— Fatoumata S.</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION FORMULAIRE DE RÉSERVATION -->
+    <section class="section-reservation" id="reservation">
+        <form action="traitement.php" method="post" class="form-reservation">
+            <h1>Réservation</h1> 
+            
+            <!-- NOUVEAU : Champ caché pour transmettre les données du panier à la BDD -->
+            <input type="hidden" name="contenu_panier" id="contenu_panier_input">
+
+            <div>
+                <label for="typecommande">Que souhaitez-vous ? </label><br>
+                <select id="typecommande" name="typecommande" onchange="affichage()">
+                    <option value="sur_place ">Réserver une table sur place</option>
+                    <option value="emporter">Commander à emporter</option>
+                </select>
+            </div>
+            <div>
+                <label for="nom">Nom complet</label><br>
+                <input type="text" id="nom" name="nom" placeholder="Nom & Prénom" required>
+            </div>
+            <div>
+                <label for="num">Numéro de téléphone</label><br>
+                <input type="tel" name="telephone" id="num" required placeholder="92-68-59-32">
+            </div>
+            <div>
+                <label for="mail">Adresse Email</label><br>
+                <input type="email" name="email" id="mail" placeholder="exemple@gmail.com">
+            </div>
+            <div id="blocpersonne">
+                <label for="nbpersonne">Nombre de personnes</label><br>
+                <input type="number" name="nbpersonne" id="nbpersonne" min="1" max="10" value="2" required>
+            </div>
+            <div>
+                <label for="date">Date de venue/retrait</label><br>
+                <input type="date" name="dates" id="date" required>
+            </div>
+            <div>
+                <label for="heure">Heure d'arrivée/retrait</label><br>
+                <input type="time" name="heure" id="heure" required>
+            </div>
+            <div>
+                <!-- MODIFIÉ : Réservé uniquement aux remarques -->
+                <label for="demande">Demandes particulières (Allergies, régimes...)</label><br>
+                <textarea rows="2" id="demande" name="demande" placeholder="Ex: Allergie aux arachides, table près de la fenêtre..."></textarea>
+            </div>
+            <button type="submit">Confirmer ma demande</button>
+        </form>
+    </section>
+
+    <!-- A PROPOS -->
+    <section class="a-propos" id="apropos">
+        <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?q=80&w=1000" alt="Nos pâtissiers passionnés">
+        <div>
+            <h2>Notre Histoire & Passion</h2>
+            <p>Tout a commencé en 2015 dans un petit atelier de Badalabougou, avec un four, deux pâtissiers et l'envie de faire découvrir la pâtisserie française au cœur de Bamako. Dix ans plus tard, cette même exigence artisanale anime chaque geste de notre équipe.</p>
+            <p>Farine tamisée, beurre pur, fruits de saison : nous choisissons chaque ingrédient avec soin, et chaque pièce est façonnée à la main, chaque matin, sous les yeux de nos clients.</p>
+            <p>Que vous veniez pour un café rapide entre deux rendez-vous ou pour célébrer un anniversaire en famille, notre équipe prend le temps de vous conseiller la douceur qui convient à l'instant.</p>
+            <br>
+            <a href="#reservation" class="btn">Réserver une table</a>
+        </div>
+    </section>
+
+    <!-- CONTACT AVEC GOOGLE MAPS -->
+    <section class="contact" id="contact">
+        <h2>Contactez-nous & Accès</h2>
+        <div class="contact-info">
+            <div>
+                <h3>📍 Adresse</h3>
+                <p>FST, Badalabougou</p>
+            </div>
+            <div>
+                <h3>📞 Téléphone</h3>
+                <p>+223 77 00 77 00</p>
+            </div>
+            <div>
+                <h3>🕒 Horaires</h3>
+                <p>Lun - Dim : 8h - 20h</p>
+            </div>
+        </div>
+
+        <!-- CARTE GOOGLE MAPS INTÉGRÉE -->
+        <div class="map-container">
+            <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15573.123456789!2d-7.9900!3d12.6350!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTLCsDM4JzA2LjAiTiA3wrA1OScwMC4wIlc!5e0!3m2!1sfr!2sml!4v1600000000000!5m2!1sfr!2sml" 
+                width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy">
+            </iframe>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>© 2026 Douceur Sucrée. Tous droits réservés. Fait avec ❤️ et du sucre.</p>
+    </footer>
+
+    <!-- SCRIPT JAVASCRIPT DU PANIER ET DU FORMULAIRE -->
+    <script>
+        // GESTION DU MODE SOMBRE / CLAIR
+        function appliquerIconeTheme() {
+            const bouton = document.getElementById("bouton-theme");
+            const estSombre = document.documentElement.getAttribute("data-theme") === "sombre";
+            bouton.textContent = estSombre ? "☀️" : "🌙";
+        }
+
+        function basculerTheme() {
+            const html = document.documentElement;
+            const estSombreActuellement = html.getAttribute("data-theme") === "sombre";
+
+            if (estSombreActuellement) {
+                html.removeAttribute("data-theme");
+                localStorage.setItem("theme-douceur-sucree", "clair");
+            } else {
+                html.setAttribute("data-theme", "sombre");
+                localStorage.setItem("theme-douceur-sucree", "sombre");
+            }
+            appliquerIconeTheme();
+        }
+
+        // Initialise l'icône du bouton selon le thème déjà appliqué au chargement
+        appliquerIconeTheme();
+
+        // Masquer / afficher nombre de personnes selon la commande
+        function affichage() {
+            var menuderoulant = document.getElementById("typecommande");
+            var nbpersonne = document.getElementById("blocpersonne");
+            if (menuderoulant.value.trim() === "emporter") {
+                nbpersonne.style.display = "none";
+            } else {
+                nbpersonne.style.display = "block"; 
+            }
+        }
+
+        // GESTION DU PANIER INTERACTIF
+        let panier = [];
+
+        function ajouterAuPanier(nom, prix) {
+            let articleExistant = panier.find(item => item.nom === nom);
+            if (articleExistant) {
+                articleExistant.quantite += 1;
+            } else {
+                panier.push({ nom: nom, prix: prix, quantite: 1 });
+            }
+            mettreAJourPanier();
+        }
+
+        function modifierQuantite(index, changement) {
+            panier[index].quantite += changement;
+            if (panier[index].quantite <= 0) {
+                panier.splice(index, 1);
+            }
+            mettreAJourPanier();
+        }
+
+        function mettreAJourPanier() {
+            const listeHtml = document.getElementById("liste-panier");
+            const totalHtml = document.getElementById("total-panier");
+            const compteurHtml = document.getElementById("compteur-panier");
+
+            let total = 0;
+            let nbArticlesTotal = 0;
+
+            if (panier.length === 0) {
+                listeHtml.innerHTML = '<p class="panier-vide">Votre panier est actuellement vide. Choisissez vos gourmandises ci-dessus !</p>';
+            } else {
+                let html = '<ul class="panier-articles">';
+                panier.forEach((item, index) => {
+                    let st = item.prix * item.quantite;
+                    total += st;
+                    nbArticlesTotal += item.quantite;
+                    html += `
+                        <li>
+                            <span class="article-nom">${item.nom}</span>
+                            <div class="article-actions">
+                                <button onclick="modifierQuantite(${index}, -1)">-</button>
+                                <span>${item.quantite}</span>
+                                <button onclick="modifierQuantite(${index}, 1)">+</button>
+                                <span class="article-prix">${st.toLocaleString()} F</span>
+                            </div>
+                        </li>
+                    `;
+                });
+                html += '</ul>';
+                listeHtml.innerHTML = html;
+            }
+
+            totalHtml.innerText = total.toLocaleString();
+            compteurHtml.innerText = nbArticlesTotal;
+        }
+
+        // MODIFIÉ : Envoi invisible vers la BDD via le champ caché
+        function transfererVersReservation() {
+            if (panier.length === 0) {
+                alert("Votre panier est vide !");
+                return;
+            }
+
+            // Assigner le contenu du panier sous forme de JSON au champ caché
+            document.getElementById("contenu_panier_input").value = JSON.stringify(panier);
+            
+            // Basculer automatiquement en mode 'emporter'
+            document.getElementById("typecommande").value = "emporter";
+            affichage();
+
+            // Redirection fluide vers le formulaire
+            document.getElementById("reservation").scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
